@@ -31,17 +31,10 @@ const Navbar = () => {
         <div className="container">
           <div className="header-content">
             <Link to="/" className="logo">
-              <img src="/logo.png" alt="ECA" onError={(e) => {
+              <img src="/logo.webp" alt="ECA" onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'flex';
               }} />
-              <div className="logo-text" style={{ display: 'flex' }}>
-                <span className="logo-icon">✨</span>
-                <div className="logo-words">
-                  <span className="logo-main">ECA</span>
-                  <span className="logo-sub">Executive Cleaning</span>
-                </div>
-              </div>
             </Link>
 
             <button 

@@ -36,12 +36,11 @@ const Register = () => {
   return (
     <div className="auth-page">
       <div className="auth-container">
-        <Link to="/" className="auth-logo">
-          <img src="/logo.png" alt="ECA" />
-          <span>Executive Cleaning Assistance</span>
-        </Link>
 
         <div className="auth-card">
+          <Link to="/" className="auth-logo">
+            <img src="/logo.webp" alt="ECA" />
+          </Link>
           <h2>Create Account</h2>
           <p>Join us for a sparkling clean experience</p>
 

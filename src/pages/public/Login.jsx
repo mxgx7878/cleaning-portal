@@ -27,12 +27,12 @@ const Login = () => {
   return (
     <div className="auth-page">
       <div className="auth-container">
-        <Link to="/" className="auth-logo">
-          <img src="/logo.png" alt="ECA" />
-          <span>Executive Cleaning Assistance</span>
-        </Link>
+        
 
         <div className="auth-card">
+          <Link to="/" className="auth-logo">
+            <img src="/logo.webp" alt="ECA" />
+          </Link>
           <h2>Welcome Back</h2>
           <p>Sign in to your account</p>
 

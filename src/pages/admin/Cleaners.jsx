@@ -109,11 +109,11 @@ const Cleaners = () => {
                   </td>
                   <td>
                     <div className="areas-cell">
-                      {cleaner.serviceAreas.slice(0, 2).map((area, idx) => (
+                      {cleaner.areas?.slice(0, 2).map((area, idx) => (
                         <span key={idx} className="area-tag">{area}</span>
                       ))}
-                      {cleaner.serviceAreas.length > 2 && (
-                        <span className="area-more">+{cleaner.serviceAreas.length - 2}</span>
+                      {cleaner.areas?.length > 2 && (
+                        <span className="area-more">+{cleaner.areas.length - 2}</span>
                       )}
                     </div>
                   </td>
@@ -188,7 +188,7 @@ const Cleaners = () => {
                     <div className="detail-section">
                       <h4>Service Areas</h4>
                       <div className="areas-list">
-                        {selectedCleaner.serviceAreas.map((area, idx) => (
+                        {selectedCleaner.areas?.map((area, idx) => (
                           <span key={idx} className="area-tag">{area}</span>
                         ))}
                       </div>
