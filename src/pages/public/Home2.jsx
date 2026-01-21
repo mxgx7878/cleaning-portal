@@ -52,59 +52,66 @@ const Home2 = () => {
     '/images/partners/partner6.png',
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentReview((prev) => (prev + 1) % reviews.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [reviews.length]);
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentReview((prev) => (prev + 2 >= reviews.length ? 0 : prev + 2));
+  }, 5000);
+  return () => clearInterval(interval);
+}, [reviews.length]);
+ 
+  const nextReview = () => {
+    setCurrentReview((prev) => (prev + 2 >= reviews.length ? 0 : prev + 2));
+  };
 
-  const nextReview = () => setCurrentReview((prev) => (prev + 1) % reviews.length);
-  const prevReview = () => setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length);
+  const prevReview = () => {
+    setCurrentReview((prev) => (prev - 2 < 0 ? Math.floor((reviews.length - 1) / 2) * 2 : prev - 2));
+  };
 
   return (
     <div className="home2-page">
       <Navbar />
 
       {/* Hero Section */}
-        <section className="hero2-section">
+      <section className="hero2-section">
         <div className="hero2-background">
-            <img src="/images/hero-bg.jpg" alt="Clean home" className="hero2-bg-image" />
-            <div className="hero2-overlay"></div>
+          <img src="/images/hero-bg.jpg" alt="Clean home" className="hero2-bg-image" />
+          <div className="hero2-overlay"></div>
         </div>
         <div className="container">
+          <div className="hero2-wrapper">
             <div className="hero2-content">
-            <h1>Local cleaners handpicked for your home</h1>
-            <p>
-                Professional cleaning services in Brisbane & Gold Coast with carefully screened 
+              <h1>Local cleaners handpicked for your home</h1>
+              <p>
+                Professional cleaning services in Brisbane & Gold Coast with carefully screened
                 and trained cleaners. We offer regular and one-off cleans tailored to your needs.
-            </p>
-            
-            {/* Postcode Search Box */}
-            <div className="hero-search-box">
+              </p>
+
+              {/* Postcode Search Box */}
+              <div className="hero-search-box">
                 <div className="search-input-wrapper">
-                <i className="fas fa-map-marker-alt"></i>
-                <input 
-                    type="text" 
-                    placeholder="Enter your postcode" 
+                  <i className="fas fa-map-marker-alt"></i>
+                  <input
+                    type="text"
+                    placeholder="Enter your postcode"
                     maxLength="4"
                     className="postcode-input"
-                />
+                  />
                 </div>
-                <Link to="/booking" className="btn-search">
-                Get Pricing & Book Online
-                <i className="fas fa-arrow-right"></i>
-                </Link>
+                <button className="btn-search" onClick={() => window.location.href = '/booking'}>
+                  Get Pricing & Book Online
+                  <i className="fas fa-arrow-right"></i>
+                </button>
+              </div>
+
+              <div className="hero-trust-badges">
+                {/* <span><i className="fas fa-shield-alt"></i> Police Checked</span> */}
+                <span>5-Star Rated<i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i> </span>
+                <span>(1000+)</span>
+              </div>
             </div>
-            
-            <div className="hero-trust-badges">
-                <span><i className="fas fa-shield-alt"></i> Police Checked</span>
-                <span><i className="fas fa-star"></i> 5-Star Rated</span>
-                <span><i className="fas fa-check-circle"></i> Fully Insured</span>
-            </div>
-            </div>
+          </div>
         </div>
-        </section>
+      </section>
 
       {/* Service Cards Section */}
       <section className="services2-section">
@@ -119,7 +126,7 @@ const Home2 = () => {
                 <small>*for a 3 hour service</small>
               </div>
               <p>
-                Book an ongoing weekly or fortnightly clean and never worry about 
+                Book an ongoing weekly or fortnightly clean and never worry about
                 the general chores again!
               </p>
               <ul className="service2-features">
@@ -137,7 +144,7 @@ const Home2 = () => {
             <div className="service2-card">
               <h3>Once-Off Clean</h3>
               <p>
-                Our move out and spring cleans take the hard work out of a big 
+                Our move out and spring cleans take the hard work out of a big
                 cleaning job by using our expert one-off cleaners.
               </p>
               <ul className="service2-features">
@@ -157,22 +164,40 @@ const Home2 = () => {
       {/* What's Included Section */}
       <section className="included-section">
         <div className="container">
-          <div className="included-header">
-            <h4>What can be included?</h4>
-            <p>
-              Any household chore, including mopping, ironing or doing the washing. 
-              Each clean is fully customisable to meet your needs. Just add any special 
-              requests in our simple booking process.
-            </p>
-            <Link to="/about" className="btn-outline-dark">How it works</Link>
-          </div>
-          <div className="included-grid">
-            {cleaningTasks.map((task, index) => (
-              <div key={index} className="included-item">
-                <i className={task.icon}></i>
-                <span>{task.name}</span>
+          <div className="included-wrapper">
+            <div className="included-left">
+              <h2>What can be included?</h2>
+              <p>
+                Any household chore, including mopping, ironing or doing the washing.
+                Each clean is fully customisable to meet your needs. Just add any special
+                requests in our simple booking process.
+              </p>
+              <Link to="/about" className="how-it-works-btn">
+                <span className="btn-icon-circle">
+                  <i className="fas fa-chevron-right"></i>
+                </span>
+                <span>How it works</span>
+              </Link>
+            </div>
+            <div className="included-right">
+              <div className="included-grid">
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Dusting</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Linen changing</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Bathroom cleaning</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Vacuuming</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Kitchen cleaning</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Washing</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Mopping</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Fridge cleaning</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Ironing</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Tidying</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Oven cleaning</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Pantry tidying</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Surfaces wiped</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>Bed making</span></div>
+                <div className="included-item"><i className="fas fa-check-circle"></i><span>And much more</span></div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
@@ -180,20 +205,21 @@ const Home2 = () => {
       {/* Video/Testimonial Section */}
       <section className="video-section">
         <div className="container">
-          <div className="video-content">
-            <h2>Fresh spaces, happy faces</h2>
-            <p>
-              Watch real customers share their experiences with Executive Cleaning Assistance! 
-              From busy professionals to families, they reveal how our trusted, police-checked 
-              cleaners have transformed their homes and lifestyles.
-            </p>
-          </div>
           <div className="video-wrapper">
-            <img src="/images/video-thumbnail.jpg" alt="Customer testimonials" />
+            <img src="/images/video-thumbnail.avif" alt="Customer testimonials" />
             <button className="play-button">
               <i className="fas fa-play"></i>
             </button>
           </div>
+          <div className="video-content">
+            <h2>Fresh spaces, happy faces</h2>
+            <p>
+              Watch real customers share their experiences with Executive Cleaning Assistance!
+              From busy professionals to families, they reveal how our trusted, police-checked
+              cleaners have transformed their homes and lifestyles.
+            </p>
+          </div>
+
         </div>
       </section>
 
@@ -204,17 +230,17 @@ const Home2 = () => {
             <div className="find-cleaner-content">
               <h2>Wind-down and relax, find the perfect cleaner for your home</h2>
               <p>
-                We take the hassle out of finding a cleaner. Executive Cleaning Assistance 
-                connects you with handpicked local cleaners who can offer personalised 
+                We take the hassle out of finding a cleaner. Executive Cleaning Assistance
+                connects you with handpicked local cleaners who can offer personalised
                 cleaning services.
               </p>
               <p>
-                Whether it's a Regular or One-off clean, our team will match you with 
+                Whether it's a Regular or One-off clean, our team will match you with
                 the perfect fit. Cleaning your home is the heart of our business.
               </p>
             </div>
             <div className="find-cleaner-image">
-              <img src="/images/relaxed-home.jpg" alt="Relaxed home environment" />
+              <img src="/images/relaxed-home.webp" alt="Relaxed home environment" />
             </div>
           </div>
         </div>
@@ -230,13 +256,13 @@ const Home2 = () => {
             <div className="personalised-content">
               <h2>Personalised cleaning for every home, every schedule</h2>
               <p>
-                With Executive Cleaning Assistance, you're in control! Customise your clean 
-                from schedule to tasks. Choose what you need, and pay only for the cleaning 
+                With Executive Cleaning Assistance, you're in control! Customise your clean
+                from schedule to tasks. Choose what you need, and pay only for the cleaning
                 you want. It's easy to add any special requests during booking.
               </p>
               <p>
-                Our customer service team carefully selects a cleaner that fits your needs, 
-                and you're in control every step of the way. Need to switch up your cleaning 
+                Our customer service team carefully selects a cleaner that fits your needs,
+                and you're in control every step of the way. Need to switch up your cleaning
                 day or frequency? No problem – do it easily through our portal or by giving us a call.
               </p>
             </div>
@@ -246,7 +272,7 @@ const Home2 = () => {
 
       {/* Partners Section */}
       <section className="partners-section">
-        <div className="container">
+        <div className="">
           <p className="partners-text">
             We are also providers for NDIS, aged care and disability providers.
           </p>
@@ -263,27 +289,44 @@ const Home2 = () => {
       {/* Why Choose Us Section */}
       <section className="why-choose-section">
         <div className="container">
-          <div className="why-choose-grid">
-            <div className="why-choose-content">
+          <div className="why-choose-wrapper">
+            <div className="why-choose-left">
               <h2>Why choose Executive Cleaning Assistance?</h2>
               <p>
-                With years of experience as an agency for domestic cleaners, we know what 
-                you need when it comes to providing help with the housework. You can choose 
-                just the cleaning services you need or engage us for regular full housekeeping 
+                With years of experience as an agency for domestic cleaners, we know what
+                you need when it comes to providing help with the housework. You can choose
+                just the cleaning services you need or engage us for regular full housekeeping
                 services. ECA is here to give you back the time you need to maintain your lifestyle.
               </p>
-              <Link to="/about" className="btn-primary">About Us</Link>
+              <Link to="/about" className="btn-orange">About Us</Link>
             </div>
-            <div className="why-choose-features">
-              {whyChooseUs.map((item, index) => (
-                <div key={index} className="why-feature-item">
-                  <i className={item.icon}></i>
-                  <div>
-                    <h4>{item.title}</h4>
-                    <p>{item.desc}</p>
-                  </div>
+            <div className="why-choose-right">
+              <div className="why-choose-list">
+                <div className="why-choose-item">
+                  <span className="check-circle"><i className="fas fa-check"></i></span>
+                  <span className="item-text">Years of experience in the industry</span>
                 </div>
-              ))}
+                <div className="why-choose-item">
+                  <span className="check-circle"><i className="fas fa-check"></i></span>
+                  <span className="item-text">Local customer service team</span>
+                </div>
+                <div className="why-choose-item">
+                  <span className="check-circle"><i className="fas fa-check"></i></span>
+                  <span className="item-text">Satisfaction guarantee</span>
+                </div>
+                <div className="why-choose-item">
+                  <span className="check-circle"><i className="fas fa-check"></i></span>
+                  <span className="item-text">Police-checked cleaners</span>
+                </div>
+                <div className="why-choose-item">
+                  <span className="check-circle"><i className="fas fa-check"></i></span>
+                  <span className="item-text">Friendly and trustworthy</span>
+                </div>
+                <div className="why-choose-item">
+                  <span className="check-circle"><i className="fas fa-check"></i></span>
+                  <span className="item-text">Public Liability Insurance and Accident Insurance for Contractors</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -297,23 +340,15 @@ const Home2 = () => {
               <span className="app-label">Download the app</span>
               <h2>Manage your clean with our simple easy to use portal</h2>
               <p>
-                Streamline your cleaning schedule at the tap of a button. Our client portal 
+                Streamline your cleaning schedule at the tap of a button. Our client portal
                 simplifies your bookings and makes managing your home cleaning a breeze.
               </p>
               <div className="app-buttons">
                 <a href="#" className="app-store-btn">
-                  <i className="fab fa-apple"></i>
-                  <div>
-                    <span>Download on the</span>
-                    <strong>App Store</strong>
-                  </div>
+                  <img src="images/app.png" alt="" />
                 </a>
                 <a href="#" className="app-store-btn">
-                  <i className="fab fa-google-play"></i>
-                  <div>
-                    <span>Get it on</span>
-                    <strong>Google Play</strong>
-                  </div>
+                  <img src="images/google.png" alt="" />
                 </a>
               </div>
             </div>
@@ -330,7 +365,7 @@ const Home2 = () => {
           <div className="reviews2-header">
             <h2>What our clients are saying</h2>
             <p>
-              With hundreds of 5-star reviews and new testimonials added every week, 
+              With hundreds of 5-star reviews and new testimonials added every week,
               our reputation as domestic cleaners in Brisbane is important to us.
             </p>
           </div>
@@ -340,26 +375,23 @@ const Home2 = () => {
               <i className="fas fa-chevron-left"></i>
             </button>
 
-            <div className="reviews2-track">
-              {reviews.map((review, index) => (
-                <div
-                  key={index}
-                  className={`review2-card ${index === currentReview ? 'active' : ''}`}
-                >
-                  <div className="review2-rating">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <i key={i} className="fas fa-star"></i>
-                    ))}
-                  </div>
-                  <h4>{review.title}</h4>
-                  <p>{review.text}</p>
-                  <div className="review2-author">
-                    <strong>{review.name}</strong>
-                    <span>{review.date}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+           <div className="reviews2-track" key={currentReview}>
+  {reviews.slice(currentReview, currentReview + 2).map((review, index) => (
+    <div key={index} className="review2-card">
+      <div className="review2-rating">
+        {[...Array(review.rating)].map((_, i) => (
+          <i key={i} className="fas fa-star"></i>
+        ))}
+      </div>
+      <h4>{review.title}</h4>
+      <p>{review.text}</p>
+      <div className="review2-author">
+        <strong>{review.name}</strong>
+        <span>{review.date}</span>
+      </div>
+    </div>
+  ))}
+</div>
 
             <button className="carousel-btn next" onClick={nextReview}>
               <i className="fas fa-chevron-right"></i>
@@ -367,11 +399,11 @@ const Home2 = () => {
           </div>
 
           <div className="reviews2-dots">
-            {reviews.map((_, index) => (
+            {Array.from({ length: Math.ceil(reviews.length / 2) }).map((_, index) => (
               <button
                 key={index}
-                className={`dot ${index === currentReview ? 'active' : ''}`}
-                onClick={() => setCurrentReview(index)}
+                className={`dot ${index === Math.floor(currentReview / 2) ? 'active' : ''}`}
+                onClick={() => setCurrentReview(index * 2)}
               />
             ))}
           </div>
@@ -392,8 +424,21 @@ const Home2 = () => {
             <div className="cta-box cta-primary">
               <h3>Book your cleaner in 60 seconds</h3>
               <p>Using our simple booking form you can have your clean booked in 60 seconds.</p>
-              <Link to="/booking" className="btn-white">Get Pricing & Book Online</Link>
-            </div>
+              <div className="hero-search-box">
+                <div className="search-input-wrapper">
+                  <i className="fas fa-map-marker-alt"></i>
+                  <input
+                    type="text"
+                    placeholder="Enter your postcode"
+                    maxLength="4"
+                    className="postcode-input"
+                  />
+                </div>
+                <button className="btn-search" onClick={() => window.location.href = '/booking'}>
+                  Get Pricing & Book Online
+                  <i className="fas fa-arrow-right"></i>
+                </button>
+              </div>            </div>
             <div className="cta-box cta-secondary">
               <h3>Or call our friendly team</h3>
               <p>Get your questions answered with our customer service team!</p>

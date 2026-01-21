@@ -475,7 +475,7 @@
 .app-image img {
   max-width: 300px;
   border-radius: 30px;
-  box-shadow: var(--shadow-xl);
+  /* box-shadow: var(--shadow-xl); */
 }
 
 .app-content h2 {
