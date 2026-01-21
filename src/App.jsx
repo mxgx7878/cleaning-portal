@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 
 // Public Pages
 import Home from './pages/public/Home';
+import Home2 from './pages/public/Home2';
 import About from './pages/public/About';
 import Services from './pages/public/Services';
 import Pricing from './pages/public/Pricing';
@@ -40,6 +41,7 @@ function App() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
+          <Route path="/home2" element={<Home2 />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/pricing" element={<Pricing />} />
