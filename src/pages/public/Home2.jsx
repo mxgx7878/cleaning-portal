@@ -24,6 +24,7 @@ const Home2 = () => {
     { icon: 'fas fa-bed', name: 'Bed making' },
     { icon: 'fas fa-ellipsis-h', name: 'And much more' },
   ];
+  
 
   const whyChooseUs = [
     { icon: 'fas fa-award', title: 'Years of Experience', desc: 'Trusted cleaning service in Brisbane' },
